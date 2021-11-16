@@ -1,9 +1,10 @@
 import Image from "next/image";
 import Moment from "react-moment";
 import Post from "../../interfaces/Post";
-import { useAppDispatch } from "../../services/redux/hooks";
-import { readPost, setSelectedPost } from "../../services/redux/reducers/app/app";
+import { useAppDispatch, useAppSelector } from "../../services/redux/hooks";
+import { readPost, selectSelectedPost, setSelectedPost } from "../../services/redux/reducers/app/app";
 import { dismissPost } from "../../services/redux/reducers/subreddit/subreddit";
+import { Card, CardBody, Meta, PostDetails, Title, UnreadMarker, User } from "./PostPreview.styles";
 
 interface PostProps {
 	post: Post;
@@ -12,6 +13,7 @@ interface PostProps {
 
 const PostPreview: React.FC<PostProps> = ({ post, read }) => {
 	const dispatch = useAppDispatch();
+	const selectedPost = useAppSelector(selectSelectedPost);
 	const onRead = () => {
 		dispatch(readPost({ postId: post.id }));
 	};
@@ -22,29 +24,31 @@ const PostPreview: React.FC<PostProps> = ({ post, read }) => {
 		dispatch(dismissPost({ postId: post.id }));
 	};
 	return (
-		<div style={{ border: "1px solid red", width: 600, margin: "20px 0" }}>
-			<div style={{ display: "flex" }}>
-				{post.thumbnail !== "self" && (
-					<div style={{ flex: "0 0 150px" }}>
-						<Image src={post.thumbnail} alt={post.title} width={post.thumbnail_width} height={post.thumbnail_height} />
-					</div>
-				)}
-				<div>
-					<div style={{ fontWeight: read ? 400 : 700 }}>{post.title}</div>
-					<div>/u/{post.author}</div>
-					<div>
-						<Moment date={post.created} unix fromNow />
-					</div>
-					<div>{post.num_comments} Comments</div>
-				</div>
-			</div>
-			<button onClick={onRead} disabled={read}>
+		<Card onClick={onSelect} className={selectedPost && selectedPost.id === post.id ? "active" : ""}>
+			{/* {post.thumbnail !== "self" && (
+				<CardImage>
+					<Image src={post.thumbnail} alt={post.title} width={post.thumbnail_width} height={post.thumbnail_height} />
+				</CardImage>
+			)} */}
+			<CardBody>
+				<PostDetails>
+					{!read && <UnreadMarker />}
+					<Title className={read ? "" : "unread"}>{post.title}</Title>
+					<User>/u/{post.author}</User>
+					<Meta>
+						<div>
+							<Moment date={post.created} unix fromNow />
+						</div>
+						<div>{post.num_comments} Comments</div>
+					</Meta>
+				</PostDetails>
+			</CardBody>
+			{/* <button onClick={onRead} disabled={read}>
 				Read
 			</button>
 			&nbsp;&nbsp;
-			<button onClick={onSelect}>Select</button>&nbsp;&nbsp;
-			<button onClick={onDismiss}>Dismiss</button>
-		</div>
+			<button onClick={onDismiss}>Dismiss</button> */}
+		</Card>
 	);
 };
 export default PostPreview;

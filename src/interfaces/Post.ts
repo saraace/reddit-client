@@ -7,4 +7,5 @@ export default interface Post {
 	thumbnail: string;
 	thumbnail_width: number;
 	thumbnail_height: number;
+	permalink: string;
 }
