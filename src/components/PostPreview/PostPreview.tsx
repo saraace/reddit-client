@@ -21,6 +21,7 @@ import {
 	UnreadMarker,
 	User
 } from "./PostPreview.styles";
+import { decodeHtml } from "../../services/utils";
 
 interface PostProps {
 	post: Post;
@@ -84,7 +85,7 @@ const PostPreview: React.FC<PostProps> = ({ post, read, selected }) => {
 					<PostDetails>
 						<UnreadMarker initial="initial" animate="animate" variants={markerVariants} custom={read} />
 						<Title className={read ? "" : "unread"} initial="initial" animate="animate" variants={titleVariants} custom={read}>
-							{post.title}
+							{decodeHtml(post.title)}
 						</Title>
 						<User>/u/{post.author}</User>
 						<Arrow>
