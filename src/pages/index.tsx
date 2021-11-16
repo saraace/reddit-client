@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+import Head from "next/head";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../services/redux/hooks";
 import { loadPosts, selectSubredditPosts } from "../services/redux/reducers/subreddit/subreddit";
@@ -17,7 +18,14 @@ const Home: NextPage = () => {
 		}
 	}, [dispatch, posts]);
 
-	return <Layout>{selectedPost && posts.map((post) => post.id).includes(selectedPost.id) && <PostDetail post={selectedPost} />}</Layout>;
+	return (
+		<>
+			<Head>
+				<title>Reddit Client</title>
+			</Head>
+			<Layout>{selectedPost && posts.map((post) => post.id).includes(selectedPost.id) && <PostDetail post={selectedPost} />}</Layout>
+		</>
+	);
 };
 
 export default Home;
