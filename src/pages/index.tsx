@@ -14,7 +14,7 @@ const Home: NextPage = () => {
 		dispatch(loadPosts("miami"));
 	}, [dispatch]);
 
-	return <Layout>{selectedPost ? <PostDetail /> : "No Post selected"}</Layout>;
+	return <Layout>{selectedPost ? <PostDetail post={selectedPost} /> : "No Post selected"}</Layout>;
 };
 
 export default Home;

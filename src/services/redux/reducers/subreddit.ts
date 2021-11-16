@@ -23,7 +23,12 @@ export const loadPosts = createAsyncThunk<Post[], string>(`/top`, async (subredd
 const subredditSlice = createSlice({
 	name: "subreddit",
 	initialState,
-	reducers: {},
+	reducers: {
+		dismissPost: (state, action) => ({
+			...state,
+			posts: state.posts.filter((post) => post.id !== action.payload.postId)
+		})
+	},
 	extraReducers: (builder) => {
 		builder.addCase(loadPosts.pending, (state) => {
 			state.loading = true;
@@ -35,6 +40,8 @@ const subredditSlice = createSlice({
 		});
 	}
 });
+
+export const { dismissPost } = subredditSlice.actions;
 
 export const selectSubredditPosts = (state: RootState) => state.subreddit.posts;
 export const selectSubredditLoading = (state: RootState) => state.subreddit.loading;
