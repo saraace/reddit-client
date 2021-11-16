@@ -79,7 +79,7 @@ const PostPreview: React.FC<PostProps> = ({ post, read, selected }) => {
 							<FontAwesomeIcon icon={faChevronRight} />
 						</Arrow>
 					</PostDetails>
-					{post.thumbnail !== "self" && post.thumbnail && (
+					{post.thumbnail && post.thumbnail !== "self" && post.thumbnail !== "nsfw" && (
 						<CardImage onClick={onSelect}>
 							<Image src={post.thumbnail} alt={post.title} layout="fill" />
 						</CardImage>
