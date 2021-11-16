@@ -16,7 +16,7 @@ export interface SubredditState {
 
 const initialState: SubredditState = {
 	name: "",
-	loading: true,
+	loading: false,
 	loadMore: true,
 	after: null,
 	before: null,
