@@ -55,7 +55,7 @@ const subredditSlice = createSlice({
 		builder.addCase(loadPosts.fulfilled, (state, action) => {
 			state.loading = false;
 			state.name = action.meta.arg;
-			state.count = state.count + action.payload.dist;
+			state.count = action.payload.dist;
 			state.after = action.payload.after;
 			state.before = action.payload.before;
 			state.loadMore = state.after ? true : false;
@@ -66,6 +66,7 @@ const subredditSlice = createSlice({
 			state.name = action.meta.arg;
 			state.loadMore = false;
 			state.posts = [];
+			state.count = 0;
 		});
 		builder.addCase(loadMorePosts.fulfilled, (state, action) => {
 			state.count = state.count + action.payload.dist;
