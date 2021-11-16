@@ -23,3 +23,14 @@ export const DismissAllButton = styled.button`
 		opacity: 1;
 	}
 `;
+
+export const Message = styled.div`
+	color: ${(props) => props.theme.colors.lightText};
+	font-size: 13px;
+	padding: 50px 0 30px;
+	text-align: center;
+
+	span {
+		margin: 0 0 0 10px;
+	}
+`;

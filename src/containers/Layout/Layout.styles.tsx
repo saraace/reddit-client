@@ -19,4 +19,20 @@ export const Sidebar = styled.div`
 	overflow-y: scroll;
 	background: ${(props) => props.theme.colors.light100};
 	padding: 28px 20px;
+	scrollbar-width: none;
+
+	&::-webkit-scrollbar {
+		width: 6px;
+	}
+	&::-webkit-scrollbar-track {
+		background: transparent;
+	}
+	&::-webkit-scrollbar-thumb {
+		background: transparent;
+		border-radius: 6px;
+	}
+	&:hover::-webkit-scrollbar-thumb,
+	&:active::-webkit-scrollbar-thumb {
+		background-color: ${(props) => props.theme.colors.inputBg};
+	}
 `;
