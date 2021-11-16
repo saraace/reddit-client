@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, isRejectedWithValue } from "@reduxjs/toolkit";
 import Listing from "../../../../interfaces/Listing";
 import Post from "../../../../interfaces/Post";
 import Posts from "../../../api/posts";
@@ -26,8 +26,13 @@ const initialState: SubredditState = {
 
 export const loadPosts = createAsyncThunk<Listing, string>(`/top`, async (subreddit: string, thunkApi) => {
 	const state = thunkApi.getState() as RootState;
-	const response = await Posts.fetchTop(subreddit, state.subreddit.count);
-	return response;
+	try {
+		const response = await Posts.fetchTop(subreddit, state.subreddit.count);
+		return response;
+	} catch (e) {
+		console.log(e);
+		return thunkApi.rejectWithValue({});
+	}
 });
 
 export const loadMorePosts = createAsyncThunk<Listing, void>(`/top/next`, async (_, thunkApi) => {
@@ -55,6 +60,12 @@ const subredditSlice = createSlice({
 			state.before = action.payload.before;
 			state.loadMore = state.after ? true : false;
 			state.posts = action.payload.children.map((post) => post.data);
+		});
+		builder.addCase(loadPosts.rejected, (state, action) => {
+			state.loading = false;
+			state.name = action.meta.arg;
+			state.loadMore = false;
+			state.posts = [];
 		});
 		builder.addCase(loadMorePosts.fulfilled, (state, action) => {
 			state.count = state.count + action.payload.dist;

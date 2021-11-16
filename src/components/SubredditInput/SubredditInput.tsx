@@ -17,7 +17,7 @@ const SubredditInput = () => {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			dispatch(loadPosts(inputSubreddit));
+			dispatch(loadPosts(inputSubreddit.replace(" ", "")));
 		};
 
 		const timer = setTimeout(() => {
