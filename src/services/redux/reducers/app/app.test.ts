@@ -3,8 +3,8 @@ import appReducer, { AppState, dismissPost, dismissPosts, readPost, setSelectedP
 describe("setSelectedPost()", () => {
 	it("should create a selected post action", () => {
 		expect(setSelectedPost({ post: { id: "1", title: "a title", author: "someone" } })).toEqual({
-			payload: { post: { id: "1", title: "a title", author: "someone" } },
-			type: "app/setSelectedPost"
+			type: "app/setSelectedPost",
+			payload: { post: { id: "1", title: "a title", author: "someone" } }
 		});
 	});
 });
@@ -12,8 +12,8 @@ describe("setSelectedPost()", () => {
 describe("readPost()", () => {
 	it("should create a read post action", () => {
 		expect(readPost({ postId: "1" })).toEqual({
-			payload: { postId: "1" },
-			type: "app/readPost"
+			type: "app/readPost",
+			payload: { postId: "1" }
 		});
 	});
 });
@@ -21,8 +21,8 @@ describe("readPost()", () => {
 describe("dismissPost()", () => {
 	it("should create a dismiss post action", () => {
 		expect(dismissPost({ postId: "1" })).toEqual({
-			payload: { postId: "1" },
-			type: "app/dismissPost"
+			type: "app/dismissPost",
+			payload: { postId: "1" }
 		});
 	});
 });
@@ -30,8 +30,8 @@ describe("dismissPost()", () => {
 describe("dismissPost()", () => {
 	it("should create a dismiss posts action", () => {
 		expect(dismissPosts({ postIds: ["1"] })).toEqual({
-			payload: { postIds: ["1"] },
-			type: "app/dismissPosts"
+			type: "app/dismissPosts",
+			payload: { postIds: ["1"] }
 		});
 	});
 });
@@ -45,8 +45,8 @@ describe("The app reducer", () => {
 
 	it("should set selected post", () => {
 		const state = appReducer(initialState, {
-			payload: { post: { id: "1", title: "a title", author: "someone" } },
-			type: "app/setSelectedPost"
+			type: "app/setSelectedPost",
+			payload: { post: { id: "1", title: "a title", author: "someone" } }
 		});
 		expect(state).toEqual({
 			readPostIds: ["2", "1"],
@@ -57,8 +57,8 @@ describe("The app reducer", () => {
 
 	it("should append a post id to the readPostIts array", () => {
 		const state = appReducer(initialState, {
-			payload: { postId: "1" },
-			type: "app/readPost"
+			type: "app/readPost",
+			payload: { postId: "1" }
 		});
 		expect(state).toEqual({
 			readPostIds: ["2", "1"],
