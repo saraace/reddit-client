@@ -5,8 +5,7 @@ import { faChevronRight, faArchive } from "@fortawesome/free-solid-svg-icons";
 import theme from "../../containers/Theme/Theme.styles";
 import Post from "../../interfaces/Post";
 import { useAppDispatch } from "../../services/redux/hooks";
-import { setSelectedPost } from "../../services/redux/reducers/app/app";
-import { dismissPost } from "../../services/redux/reducers/subreddit/subreddit";
+import { setSelectedPost, dismissPost } from "../../services/redux/reducers/app/app";
 import {
 	AnimatedCardWrapper,
 	Arrow,
@@ -65,7 +64,6 @@ const PostPreview: React.FC<PostProps> = ({ post, read, selected }) => {
 	return (
 		<AnimatedCardWrapper initial={{ opacity: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }}>
 			<Card
-				onClick={onSelect}
 				className={selected ? "active" : ""}
 				initial="initial"
 				animate="animate"
@@ -73,7 +71,7 @@ const PostPreview: React.FC<PostProps> = ({ post, read, selected }) => {
 				variants={cardVariants}
 				custom={selected}>
 				<CardBody>
-					<PostDetails>
+					<PostDetails onClick={onSelect}>
 						<UnreadMarker initial="initial" animate="animate" variants={markerVariants} custom={read} />
 						<Title className={read ? "" : "unread"}>{decodeHtml(post.title)}</Title>
 						<User>/u/{post.author}</User>
@@ -82,13 +80,13 @@ const PostPreview: React.FC<PostProps> = ({ post, read, selected }) => {
 						</Arrow>
 					</PostDetails>
 					{post.thumbnail !== "self" && post.thumbnail && (
-						<CardImage>
+						<CardImage onClick={onSelect}>
 							<Image src={post.thumbnail} alt={post.title} layout="fill" />
 						</CardImage>
 					)}
 				</CardBody>
 				<CardFooter>
-					<Meta>
+					<Meta onClick={onSelect}>
 						<div>
 							<Moment date={post.created} unix fromNow />
 						</div>

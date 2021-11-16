@@ -1,12 +1,12 @@
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { useAppSelector } from "../../services/redux/hooks";
-import { selectReadPostIds, selectSelectedPost } from "../../services/redux/reducers/app/app";
+import { dismissPosts, selectDismissedPostIds, selectReadPostIds, selectSelectedPost } from "../../services/redux/reducers/app/app";
 import {
-	dismissAllPosts,
 	loadMorePosts,
 	selectSubredditLoading,
 	selectSubredditLoadMore,
@@ -14,9 +14,8 @@ import {
 	selectSubredditPosts
 } from "../../services/redux/reducers/subreddit/subreddit";
 import PostPreview from "../PostPreview/PostPreview";
-import { DismissAll, DismissAllButton, Message } from "./PostList.styles";
 import SubredditInput from "../SubredditInput/SubredditInput";
-import { useEffect, useRef } from "react";
+import { DismissAll, DismissAllButton, Message } from "./PostList.styles";
 
 const PostList = () => {
 	const dispatch = useDispatch();
@@ -25,6 +24,7 @@ const PostList = () => {
 	const loadingPosts = useAppSelector(selectSubredditLoading);
 	const loadMore = useAppSelector(selectSubredditLoadMore);
 	const readPostIds = useAppSelector(selectReadPostIds);
+	const dismissedPostIds = useAppSelector(selectDismissedPostIds);
 	const selectedPost = useAppSelector(selectSelectedPost);
 
 	// reference to bottm of post list
@@ -37,11 +37,7 @@ const PostList = () => {
 	}, [inView, loadMore, dispatch]);
 
 	const onDismissAll = () => {
-		dispatch(dismissAllPosts({}));
-	};
-
-	const onLoadMore = () => {
-		dispatch(loadMorePosts());
+		dispatch(dismissPosts({ postIds: posts.map((post) => post.id) }));
 	};
 
 	return (
@@ -61,14 +57,17 @@ const PostList = () => {
 				</Message>
 			) : (
 				<AnimatePresence>
-					{posts.map((post) => (
-						<PostPreview
-							key={post.id}
-							read={readPostIds.includes(post.id)}
-							selected={selectedPost ? selectedPost.id === post.id : false}
-							{...{ post }}
-						/>
-					))}
+					{posts.map(
+						(post) =>
+							!dismissedPostIds.includes(post.id) && (
+								<PostPreview
+									key={post.id}
+									read={readPostIds.includes(post.id)}
+									selected={selectedPost ? selectedPost.id === post.id : false}
+									{...{ post }}
+								/>
+							)
+					)}
 				</AnimatePresence>
 			)}
 			{!loadingPosts && <div ref={loadMoreRef} />}
