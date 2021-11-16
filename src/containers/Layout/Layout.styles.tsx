@@ -36,3 +36,14 @@ export const Sidebar = styled.div`
 		background-color: ${(props) => props.theme.colors.inputBg};
 	}
 `;
+
+export const Content = styled.div`
+	flex-grow: 1;
+	padding: 0 20px;
+`;
+
+export const SubredditTitle = styled.div`
+	border-bottom: 2px solid ${(props) => props.theme.colors.light100};
+`;
+
+export const SelectedPost = styled.div``;
