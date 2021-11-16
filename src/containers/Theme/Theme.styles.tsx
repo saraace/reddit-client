@@ -8,7 +8,10 @@ const theme: DefaultTheme = {
 		white: "#ffffff",
 
 		text: "#283951",
-		lightText: "#94aac9"
+		lightText: "#94aac9",
+
+		inputBg: "#ebf1f7",
+		inputText: "#a0b3ce"
 	}
 };
 

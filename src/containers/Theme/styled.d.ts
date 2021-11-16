@@ -8,8 +8,12 @@ declare module "styled-components" {
 			light200: string;
 			blue: string;
 			white: string;
+
 			text: string;
 			lightText: string;
+
+			inputBg: string;
+			inputText: string;
 		};
 	}
 }

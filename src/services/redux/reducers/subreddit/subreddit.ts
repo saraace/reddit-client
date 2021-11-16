@@ -77,6 +77,7 @@ const subredditSlice = createSlice({
 
 export const { dismissPost, dismissAllPosts } = subredditSlice.actions;
 
+export const selectSubredditName = (state: RootState) => state.subreddit.name;
 export const selectSubredditPosts = (state: RootState) => state.subreddit.posts;
 export const selectSubredditLoading = (state: RootState) => state.subreddit.loading;
 export const selectSubredditLoadMore = (state: RootState) => state.subreddit.loadMore;

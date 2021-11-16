@@ -11,6 +11,7 @@ import {
 } from "../../services/redux/reducers/subreddit/subreddit";
 import PostPreview from "../PostPreview/PostPreview";
 import { DismissAll, DismissAllButton } from "./PostList.styles";
+import SubredditInput from "../SubredditInput/SubredditInput";
 
 const PostList = () => {
 	const dispatch = useDispatch();
@@ -30,6 +31,7 @@ const PostList = () => {
 
 	return (
 		<div>
+			<SubredditInput />
 			{!loadingPosts && (
 				<DismissAll>
 					<DismissAllButton onClick={onDismissAll} disabled={posts.length <= 0}>

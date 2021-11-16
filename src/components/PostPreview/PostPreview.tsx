@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Moment from "react-moment";
-import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight, faArchive } from "@fortawesome/free-solid-svg-icons";
 import theme from "../../containers/Theme/Theme.styles";
@@ -92,9 +91,9 @@ const PostPreview: React.FC<PostProps> = ({ post, read, selected }) => {
 							<FontAwesomeIcon icon={faChevronRight} />
 						</Arrow>
 					</PostDetails>
-					{post.thumbnail !== "self" && (
+					{post.thumbnail !== "self" && post.thumbnail && (
 						<CardImage>
-							<Image src={post.thumbnail} alt={post.title} width={100} height={100} layout="fill" />
+							<Image src={post.thumbnail} alt={post.title} layout="fill" />
 						</CardImage>
 					)}
 				</CardBody>
