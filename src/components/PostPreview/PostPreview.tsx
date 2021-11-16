@@ -70,8 +70,8 @@ const PostPreview: React.FC<PostProps> = ({ post, read, selected }) => {
 				whileHover="hover"
 				variants={cardVariants}
 				custom={selected}>
-				<CardBody>
-					<PostDetails onClick={onSelect}>
+				<CardBody onClick={onSelect}>
+					<PostDetails>
 						<UnreadMarker initial="initial" animate="animate" variants={markerVariants} custom={read} />
 						<Title className={read ? "" : "unread"}>{decodeHtml(post.title)}</Title>
 						<User>/u/{post.author}</User>
@@ -80,7 +80,7 @@ const PostPreview: React.FC<PostProps> = ({ post, read, selected }) => {
 						</Arrow>
 					</PostDetails>
 					{post.thumbnail && post.thumbnail !== "self" && post.thumbnail !== "nsfw" && (
-						<CardImage onClick={onSelect}>
+						<CardImage>
 							<Image src={post.thumbnail} alt={post.title} layout="fill" />
 						</CardImage>
 					)}
