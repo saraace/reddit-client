@@ -16,7 +16,7 @@ const PostDetail: React.FC<PostDetailProps> = ({ post }) => {
 		if (post) {
 			if (post.thumbnail !== "self" && post.thumbnail) {
 				// calculate image height
-				setImageHeight(1020 * (post.preview.images[0].source.height / post.preview.images[0].source.width));
+				setImageHeight(600 * (post.preview.images[0].source.height / post.preview.images[0].source.width));
 			}
 		}
 	}, [post]);
@@ -41,7 +41,7 @@ const PostDetail: React.FC<PostDetailProps> = ({ post }) => {
 								loader={imageLoader}
 								src={decodeHtml(post.preview.images[0].source.url)}
 								alt={post.title}
-								width={1020}
+								width={600}
 								height={imageHeight}
 								unoptimized
 							/>
