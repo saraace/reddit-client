@@ -1,4 +1,5 @@
 import { useDispatch } from "react-redux";
+import { AnimatePresence, motion } from "framer-motion";
 import { useAppSelector } from "../../services/redux/hooks";
 import { selectReadPostIds, selectSelectedPost } from "../../services/redux/reducers/app/app";
 import {
@@ -36,14 +37,16 @@ const PostList = () => {
 			{loadingPosts ? (
 				<div>Loading</div>
 			) : (
-				posts.map((post) => (
-					<PostPreview
-						key={post.id}
-						read={readPostIds.includes(post.id)}
-						selected={selectedPost ? selectedPost.id === post.id : false}
-						{...{ post }}
-					/>
-				))
+				<AnimatePresence>
+					{posts.map((post) => (
+						<PostPreview
+							key={post.id}
+							read={readPostIds.includes(post.id)}
+							selected={selectedPost ? selectedPost.id === post.id : false}
+							{...{ post }}
+						/>
+					))}
+				</AnimatePresence>
 			)}
 			{!loadingPosts && (
 				<button onClick={onLoadMore} disabled={!loadMore}>

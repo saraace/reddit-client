@@ -1,6 +1,10 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
 
+export const AnimatedCardWrapper = styled(motion.div)`
+	overflow: hidden;
+`;
+
 export const Card = styled(motion.div)`
 	display: block;
 	background: #fff;
@@ -10,6 +14,7 @@ export const Card = styled(motion.div)`
 	font-size: 15px;
 	overflow: hidden;
 	border: 2px solid ${(props) => props.theme.colors.white};
+	padding: 20px 24px 12px 24px;
 
 	&:hover {
 		border-color: ${(props) => props.theme.colors.light200};
@@ -20,14 +25,25 @@ export const Card = styled(motion.div)`
 	}
 `;
 
-export const CardImage = styled.div``;
+export const CardImage = styled.div`
+	flex: 0 0 100px;
+	margin: 0 0 0 10px;
+	height: 100px;
+	position: relative;
+
+	img {
+		object-fit: cover;
+	}
+`;
 
 export const CardBody = styled.div`
-	padding: 20px 24px;
+	display: flex;
 	position: relative;
 `;
 
-export const PostDetails = styled.div``;
+export const PostDetails = styled.div`
+	flex-grow: 1;
+`;
 
 export const UnreadMarker = styled(motion.div)`
 	width: 6px;
@@ -35,8 +51,19 @@ export const UnreadMarker = styled(motion.div)`
 	background: ${(props) => props.theme.colors.blue};
 	border-radius: 50%;
 	position: absolute;
-	top: 25px;
-	left: 12px;
+	top: 5px;
+	left: -13px;
+`;
+
+export const Arrow = styled.div`
+	position: absolute;
+	top: 50%;
+	right: -15px;
+	display: flex;
+	justify-content: center;
+	align: center;
+	color: ${(props) => props.theme.colors.lightText};
+	opacity: 0.3;
 `;
 
 export const Title = styled(motion.div)`
@@ -51,10 +78,40 @@ export const User = styled.div`
 	color: ${(props) => props.theme.colors.lightText};
 `;
 
+export const CardFooter = styled.div`
+	display: flex;
+	justify-content: space-between; 
+	align-items center;
+	margin: 15px 0 0;
+`;
+
 export const Meta = styled.div`
 	display: flex;
 	color: #94aac9;
 	font-size: 13px;
 	justify-content: space-between;
-	margin: 10px 0 0;
+	align-items center;
+
+	& > div {
+		margin: 0 10px 0 0;
+	}
+`;
+
+export const DismissButton = styled.button`
+	border: none;
+	background: transparent;
+	color: ${(props) => props.theme.colors.lightText};
+	cursor: pointer;
+	opacity: 0.7;
+	transition: 0.3s all ease;
+
+	& > span {
+		margin: 0 0 0 5px;
+	}
+
+	&:hover {
+		color: ${(props) => props.theme.colors.blue};
+		text-decoration: underline;
+		opacity: 1;
+	}
 `;

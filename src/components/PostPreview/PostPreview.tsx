@@ -1,11 +1,27 @@
 import Image from "next/image";
 import Moment from "react-moment";
+import { motion } from "framer-motion";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronRight, faArchive } from "@fortawesome/free-solid-svg-icons";
 import theme from "../../containers/Theme/Theme.styles";
 import Post from "../../interfaces/Post";
 import { useAppDispatch } from "../../services/redux/hooks";
 import { setSelectedPost } from "../../services/redux/reducers/app/app";
 import { dismissPost } from "../../services/redux/reducers/subreddit/subreddit";
-import { Card, CardBody, Meta, PostDetails, Title, UnreadMarker, User } from "./PostPreview.styles";
+import {
+	AnimatedCardWrapper,
+	Arrow,
+	Card,
+	CardBody,
+	CardFooter,
+	CardImage,
+	DismissButton,
+	Meta,
+	PostDetails,
+	Title,
+	UnreadMarker,
+	User
+} from "./PostPreview.styles";
 
 interface PostProps {
 	post: Post;
@@ -56,40 +72,46 @@ const PostPreview: React.FC<PostProps> = ({ post, read, selected }) => {
 		dispatch(dismissPost({ postId: post.id }));
 	};
 	return (
-		<Card
-			onClick={onSelect}
-			className={selected ? "active" : ""}
-			initial="initial"
-			animate="animate"
-			whileHover="hover"
-			variants={cardVariants}
-			custom={selected}>
-			{/* {post.thumbnail !== "self" && (
-				<CardImage>
-					<Image src={post.thumbnail} alt={post.title} width={post.thumbnail_width} height={post.thumbnail_height} />
-				</CardImage>
-			)} */}
-			<CardBody>
-				<PostDetails>
-					<UnreadMarker initial="initial" animate="animate" variants={markerVariants} custom={read} />
-					<Title className={read ? "" : "unread"} initial="initial" animate="animate" variants={titleVariants} custom={read}>
-						{post.title}
-					</Title>
-					<User>/u/{post.author}</User>
+		<AnimatedCardWrapper initial={{ opacity: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }}>
+			<Card
+				onClick={onSelect}
+				className={selected ? "active" : ""}
+				initial="initial"
+				animate="animate"
+				whileHover="hover"
+				variants={cardVariants}
+				custom={selected}>
+				<CardBody>
+					<PostDetails>
+						<UnreadMarker initial="initial" animate="animate" variants={markerVariants} custom={read} />
+						<Title className={read ? "" : "unread"} initial="initial" animate="animate" variants={titleVariants} custom={read}>
+							{post.title}
+						</Title>
+						<User>/u/{post.author}</User>
+						<Arrow>
+							<FontAwesomeIcon icon={faChevronRight} />
+						</Arrow>
+					</PostDetails>
+					{post.thumbnail !== "self" && (
+						<CardImage>
+							<Image src={post.thumbnail} alt={post.title} width={100} height={100} layout="fill" />
+						</CardImage>
+					)}
+				</CardBody>
+				<CardFooter>
 					<Meta>
 						<div>
 							<Moment date={post.created} unix fromNow />
 						</div>
 						<div>{post.num_comments} Comments</div>
 					</Meta>
-				</PostDetails>
-			</CardBody>
-			{/* <button onClick={onRead} disabled={read}>
-				Read
-			</button>
-			&nbsp;&nbsp;
-			<button onClick={onDismiss}>Dismiss</button> */}
-		</Card>
+					<DismissButton onClick={onDismiss}>
+						<FontAwesomeIcon icon={faArchive} />
+						<span>Dismiss</span>
+					</DismissButton>
+				</CardFooter>
+			</Card>
+		</AnimatedCardWrapper>
 	);
 };
 export default PostPreview;
