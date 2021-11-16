@@ -1,13 +1,13 @@
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "../../services/redux/hooks";
-import { selectReadPostIds } from "../../services/redux/reducers/app";
+import { selectReadPostIds } from "../../services/redux/reducers/app/app";
 import {
 	dismissAllPosts,
 	loadMorePosts,
 	selectSubredditLoading,
 	selectSubredditLoadMore,
 	selectSubredditPosts
-} from "../../services/redux/reducers/subreddit";
+} from "../../services/redux/reducers/subreddit/subreddit";
 import PostPreview from "../PostPreview/PostPreview";
 
 const PostList = () => {

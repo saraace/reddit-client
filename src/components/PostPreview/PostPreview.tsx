@@ -2,8 +2,8 @@ import Image from "next/image";
 import Moment from "react-moment";
 import Post from "../../interfaces/Post";
 import { useAppDispatch } from "../../services/redux/hooks";
-import { readPost, setSelectedPost } from "../../services/redux/reducers/app";
-import { dismissPost } from "../../services/redux/reducers/subreddit";
+import { readPost, setSelectedPost } from "../../services/redux/reducers/app/app";
+import { dismissPost } from "../../services/redux/reducers/subreddit/subreddit";
 
 interface PostProps {
 	post: Post;

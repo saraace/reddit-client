@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import subredditReducer from "./reducers/subreddit";
-import appReducer from "./reducers/app";
+import subredditReducer from "./reducers/subreddit/subreddit";
+import appReducer from "./reducers/app/app";
 import { loadState, saveState } from "../localstorage";
 
 const persistentState = loadState();

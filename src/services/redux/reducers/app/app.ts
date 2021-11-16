@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import Post from "../../../interfaces/Post";
-import { RootState } from "../store";
+import Post from "../../../../interfaces/Post";
+import { RootState } from "../../store";
 
 export interface AppState {
 	selectedPost: Post | null;

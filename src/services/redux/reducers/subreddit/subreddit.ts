@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import Listing from "../../../interfaces/Listing";
-import Post from "../../../interfaces/Post";
-import Posts from "../../api/posts";
-import { RootState } from "../store";
+import Listing from "../../../../interfaces/Listing";
+import Post from "../../../../interfaces/Post";
+import Posts from "../../../api/posts";
+import { RootState } from "../../store";
 
 export interface SubredditState {
 	name: string;
