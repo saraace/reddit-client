@@ -8,7 +8,7 @@ import {
 	selectSubredditLoadMore,
 	selectSubredditPosts
 } from "../../services/redux/reducers/subreddit";
-import Post from "./Post/Post";
+import PostPreview from "../PostPreview/PostPreview";
 
 const PostList = () => {
 	const dispatch = useDispatch();
@@ -32,7 +32,11 @@ const PostList = () => {
 					Dismiss All
 				</button>
 			)}
-			{loadingPosts ? <div>Loading</div> : posts.map((post) => <Post key={post.id} read={readPostIds.includes(post.id)} {...{ post }} />)}
+			{loadingPosts ? (
+				<div>Loading</div>
+			) : (
+				posts.map((post) => <PostPreview key={post.id} read={readPostIds.includes(post.id)} {...{ post }} />)
+			)}
 			{!loadingPosts && (
 				<button onClick={onLoadMore} disabled={!loadMore}>
 					Load More

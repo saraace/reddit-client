@@ -1,16 +1,16 @@
 import Image from "next/image";
 import Moment from "react-moment";
-import Post from "../../../interfaces/Post";
-import { useAppDispatch } from "../../../services/redux/hooks";
-import { readPost, setSelectedPost } from "../../../services/redux/reducers/app";
-import { dismissPost } from "../../../services/redux/reducers/subreddit";
+import Post from "../../interfaces/Post";
+import { useAppDispatch } from "../../services/redux/hooks";
+import { readPost, setSelectedPost } from "../../services/redux/reducers/app";
+import { dismissPost } from "../../services/redux/reducers/subreddit";
 
 interface PostProps {
 	post: Post;
 	read: boolean;
 }
 
-const Post: React.FC<PostProps> = ({ post, read }) => {
+const PostPreview: React.FC<PostProps> = ({ post, read }) => {
 	const dispatch = useAppDispatch();
 	const onRead = () => {
 		dispatch(readPost({ postId: post.id }));
@@ -47,4 +47,4 @@ const Post: React.FC<PostProps> = ({ post, read }) => {
 		</div>
 	);
 };
-export default Post;
+export default PostPreview;
