@@ -6,7 +6,6 @@ export const GlobalStyles = createGlobalStyle`
         margin: 0;
         font-family: ${(props) => props.theme.fontFamily};
         color: ${(props) => props.theme.colors.text};
-        border 1px solid red
     }
 `;
 

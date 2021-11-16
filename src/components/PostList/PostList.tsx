@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import { useAppSelector } from "../../services/redux/hooks";
 import { selectReadPostIds, selectSelectedPost } from "../../services/redux/reducers/app/app";
 import {
@@ -10,6 +10,7 @@ import {
 	selectSubredditPosts
 } from "../../services/redux/reducers/subreddit/subreddit";
 import PostPreview from "../PostPreview/PostPreview";
+import { DismissAll, DismissAllButton } from "./PostList.styles";
 
 const PostList = () => {
 	const dispatch = useDispatch();
@@ -30,9 +31,11 @@ const PostList = () => {
 	return (
 		<div>
 			{!loadingPosts && (
-				<button onClick={onDismissAll} disabled={posts.length <= 0}>
-					Dismiss All
-				</button>
+				<DismissAll>
+					<DismissAllButton onClick={onDismissAll} disabled={posts.length <= 0}>
+						Dismiss All
+					</DismissAllButton>
+				</DismissAll>
 			)}
 			{loadingPosts ? (
 				<div>Loading</div>
