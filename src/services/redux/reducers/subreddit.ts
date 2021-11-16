@@ -27,6 +27,10 @@ const subredditSlice = createSlice({
 		dismissPost: (state, action) => ({
 			...state,
 			posts: state.posts.filter((post) => post.id !== action.payload.postId)
+		}),
+		dismissAllPosts: (state, _) => ({
+			...state,
+			posts: []
 		})
 	},
 	extraReducers: (builder) => {
@@ -41,7 +45,7 @@ const subredditSlice = createSlice({
 	}
 });
 
-export const { dismissPost } = subredditSlice.actions;
+export const { dismissPost, dismissAllPosts } = subredditSlice.actions;
 
 export const selectSubredditPosts = (state: RootState) => state.subreddit.posts;
 export const selectSubredditLoading = (state: RootState) => state.subreddit.loading;
