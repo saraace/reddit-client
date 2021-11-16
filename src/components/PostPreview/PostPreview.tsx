@@ -55,15 +55,6 @@ const PostPreview: React.FC<PostProps> = ({ post, read, selected }) => {
 		})
 	};
 
-	const titleVariants = {
-		initial: (read: boolean) => ({
-			fontWeight: read ? `400` : `700`
-		}),
-		animate: (read: boolean) => ({
-			fontWeight: read ? `400` : `700`
-		})
-	};
-
 	const onSelect = () => {
 		dispatch(setSelectedPost({ post }));
 	};
@@ -84,9 +75,7 @@ const PostPreview: React.FC<PostProps> = ({ post, read, selected }) => {
 				<CardBody>
 					<PostDetails>
 						<UnreadMarker initial="initial" animate="animate" variants={markerVariants} custom={read} />
-						<Title className={read ? "" : "unread"} initial="initial" animate="animate" variants={titleVariants} custom={read}>
-							{decodeHtml(post.title)}
-						</Title>
+						<Title className={read ? "" : "unread"}>{decodeHtml(post.title)}</Title>
 						<User>/u/{post.author}</User>
 						<Arrow>
 							<FontAwesomeIcon icon={faChevronRight} />

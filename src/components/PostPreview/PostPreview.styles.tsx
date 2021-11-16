@@ -66,7 +66,7 @@ export const Arrow = styled.div`
 	opacity: 0.3;
 `;
 
-export const Title = styled(motion.div)`
+export const Title = styled.div`
 	margin: 0 0 8px;
 
 	&.unread {
