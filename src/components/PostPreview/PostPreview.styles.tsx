@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import { motion } from "framer-motion";
 
-export const Card = styled.div`
+export const Card = styled(motion.div)`
 	display: block;
 	background: #fff;
 	border-radius: 10px;
@@ -28,7 +29,7 @@ export const CardBody = styled.div`
 
 export const PostDetails = styled.div``;
 
-export const UnreadMarker = styled.div`
+export const UnreadMarker = styled(motion.div)`
 	width: 6px;
 	height: 6px;
 	background: ${(props) => props.theme.colors.blue};
@@ -38,7 +39,7 @@ export const UnreadMarker = styled.div`
 	left: 12px;
 `;
 
-export const Title = styled.div`
+export const Title = styled(motion.div)`
 	margin: 0 0 8px;
 
 	&.unread {

@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "../../services/redux/hooks";
-import { selectReadPostIds } from "../../services/redux/reducers/app/app";
+import { selectReadPostIds, selectSelectedPost } from "../../services/redux/reducers/app/app";
 import {
 	dismissAllPosts,
 	loadMorePosts,
@@ -16,6 +16,7 @@ const PostList = () => {
 	const loadingPosts = useAppSelector(selectSubredditLoading);
 	const loadMore = useAppSelector(selectSubredditLoadMore);
 	const readPostIds = useAppSelector(selectReadPostIds);
+	const selectedPost = useAppSelector(selectSelectedPost);
 
 	const onDismissAll = () => {
 		dispatch(dismissAllPosts({}));
@@ -35,7 +36,14 @@ const PostList = () => {
 			{loadingPosts ? (
 				<div>Loading</div>
 			) : (
-				posts.map((post) => <PostPreview key={post.id} read={readPostIds.includes(post.id)} {...{ post }} />)
+				posts.map((post) => (
+					<PostPreview
+						key={post.id}
+						read={readPostIds.includes(post.id)}
+						selected={selectedPost ? selectedPost.id === post.id : false}
+						{...{ post }}
+					/>
+				))
 			)}
 			{!loadingPosts && (
 				<button onClick={onLoadMore} disabled={!loadMore}>
