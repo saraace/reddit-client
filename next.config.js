@@ -1,4 +1,7 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
-  reactStrictMode: true,
-}
+	reactStrictMode: true,
+	images: {
+		domains: ["a.thumbs.redditmedia.com", "b.thumbs.redditmedia.com"]
+	}
+};

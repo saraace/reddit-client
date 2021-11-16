@@ -16,7 +16,11 @@ const PostList = () => {
 
 	return (
 		<div>
-			{!loadingPosts && posts.length > 0 && <button onClick={onDismissAll}>Dismiss All</button>}
+			{!loadingPosts && (
+				<button onClick={onDismissAll} disabled={posts.length <= 0}>
+					Dismiss All
+				</button>
+			)}
 			{loadingPosts ? <div>Loading</div> : posts.map((post) => <Post key={post.id} read={readPostIds.includes(post.id)} {...{ post }} />)}
 		</div>
 	);
