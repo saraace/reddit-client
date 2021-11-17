@@ -1,34 +1,34 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# Reddit Client
 
-First, run the development server:
+![Reddit Client](https://wordpress.saraace.com/wp-content/uploads/2021/11/Screen-Shot-2021-11-16-at-6.15.50-PM.png)
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+##  🚀 Project Overview
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The purpose of this assessment was to create an app to display the top Reddit posts within a specific subreddit thread using data delivered via an API. Displayed on the left is a sidebar containing an input used to control the subreddit; by default, the app defaults to /r/Damnthatsinteresting. Under the sidebar is a list of the top posts within the specified subreddit. Each post has a read status that is marked to read on click. Additionally, the user can dismiss individual posts by clicking on the dismiss button located in the bottom corner of each post. All posts can be dismissed by clicking "Dismiss All" under the text input.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+Posts are loaded ten items at a time; when the user reaches the bottom of the sidebar another batch of items is fetched and appended to the list. Once there are no more items to fetch, a message at the bottom indicates that the user has loaded all available posts.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+Additionally, when the user clicks on a post, the details of that post appear on the right-hand side with greater detail, such as a full-size image and post body. 
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## 🛠 Installation
 
-## Learn More
+Please run the following on your local environment: 
 
-To learn more about Next.js, take a look at the following resources:
+    $ yarn install
+    $ yarn dev
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 💻 Technologies Used
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+ - Typescript
+ - React
+ - Redux
+ - Jest
+ - Styled Components
+ - Framer Motion
 
-## Deploy on Vercel
+## 👩🏻‍💻 Note from the Author
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Hi! I’m Sara Acevedo. I’m a software engineer, and I love working on visually appealing Front End Projects. I found this tech challenge enjoyable because it allowed me to be creative while showing off my skills. I decided to use Typescript on this project because of the complexity of the data returned from the API. As a lover of clean code, I knew this would be the perfect opportunity to utilize Typescript to keep my components clear and concise. Additionally, I set up a Redux store to manage the subreddit state. Redux allowed me to avoid passing massive objects from component to component when rendering the post items and dispatching actions to load more posts.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Please let me know of any feedback. I look forward to the next steps! *&mdash; Sara*
